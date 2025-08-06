@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>School DB Interface</title>
+    <script>
+        async function addStudent() {
+            const data = {
+                id: document.getElementById("sid").value,
+                name: document.getElementById("sname").value,
+                section: document.getElementById("section").value,
+                cid: document.getElementById("scid").value
+            };
+            await fetch("/add_student", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data)
+            }).then(res => res.json()).then(alertMsg => alert(alertMsg.message));
+        }
+
+        async function addCourse() {
+            const data = {
+                cid: document.getElementById("cid").value,
+                cname: document.getElementById("cname").value
+            };
+            await fetch("/add_course", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data)
+            }).then(res => res.json()).then(alertMsg => alert(alertMsg.message));
+        }
+
+        async function runQuery() {
+            const query = document.getElementById("query").value;
+            const res = await fetch("/run_query", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ query })
+            });
+            const data = await res.json();
+            let output = "<pre>" + JSON.stringify(data, null, 2) + "</pre>";
+            document.getElementById("result").innerHTML = output;
+        }
+    </script>
+</head>
+<body>
+    <h2>Add Student</h2>
+    ID: <input id="sid"><br>
+    Name: <input id="sname"><br>
+    Section: <input id="section"><br>
+    Course ID: <input id="scid"><br>
+    <button onclick="addStudent()">Add Student</button>
+
+    <h2>Add Course</h2>
+    Course ID: <input id="cid"><br>
+    Course Name: <input id="cname"><br>
+    <button onclick="addCourse()">Add Course</button>
+
+    <h2>Run SQL Query</h2>
+    <textarea id="query" rows="4" cols="50" placeholder="SELECT * FROM students;"></textarea><br>
+    <button onclick="runQuery()">Run Query</button>
+
+    <h3>Results:</h3>
+    <div id="result"></div>
+</body>
+</html>
