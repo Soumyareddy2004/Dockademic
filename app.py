@@ -7,13 +7,19 @@ load_dotenv()
 app = Flask(__name__)
 
 # ✅ Define database config properly
-db_config = {
-    'host': 'localhost',
-    'user': 'root',
-    'password': 'root',  # 🔁 <- put your MySQL root password here
-    'database': 'school'
-}
+# db_config = {
+#     'host': 'localhost',
+#     'user': 'root',
+#     'password': 'root',  # 🔁 <- put your MySQL root password here
+#     'database': 'school'
+# }
 
+db_config = {
+    'host': 'sql7.freesqldatabase.com',
+    'user': 'sql7793844',
+    'password': 'dTUIhAqPX6',
+    'database': 'sql7793844'
+}
 
 # ✅ Optional: Initial connection test
 try:
