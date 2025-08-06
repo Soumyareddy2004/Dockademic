@@ -1,17 +1,19 @@
 from flask import Flask, request, render_template, jsonify
 import mysql.connector
 import os
+from dotenv import load_dotenv
+load_dotenv()
 
 app = Flask(__name__)
 
 # ✅ Define database config properly
 db_config = {
-    'host': os.environ.get("DB_HOST", "localhost"),
-    'port': int(os.environ.get("DB_PORT", 3306)),
-    'user': os.environ.get("DB_USER", "root"),
-    'password': os.environ.get("DB_PASSWORD", ""),
-    'database': os.environ.get("DB_NAME", "school")
+    'host': 'localhost',
+    'user': 'root',
+    'password': 'root',  # 🔁 <- put your MySQL root password here
+    'database': 'school'
 }
+
 
 # ✅ Optional: Initial connection test
 try:
